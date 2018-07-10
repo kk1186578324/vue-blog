@@ -38,9 +38,26 @@ router.post("/login",function(req,res,next){
           }
         })
       }else{
-        res.json({
-          status:'0',
-          msg:"账户名或密码错误"
+        User.create(param,function(err,doc){
+          console.log(err,doc)
+          if(err){
+            console.log(err);
+            res.json({
+              status:'1',
+              msg:err.message
+            })
+          }else{
+            if(doc){
+              res.json({
+                status:'1',
+              })
+            }else{
+              res.json({
+                status:'0',
+                msg:"账户名或密码错误"
+              })
+            }
+          }
         })
       }
     }

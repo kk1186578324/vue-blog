@@ -2,17 +2,16 @@
 
   <div class="fill">
     <head-top></head-top>
-  <el-row>
+  <el-row :gutter="20">
     <el-col :span="4">
       <el-menu
-        default-active="articleList"
+        :default-active="defaultActive"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
         router
       >
-
-        <el-menu-item index="articleList">
+        <el-menu-item index="listArticle">
           <i class="el-icon-location"></i>
           <span>文章列表</span>
         </el-menu-item>
@@ -31,9 +30,9 @@
         </el-menu-item>
       </el-menu>
     </el-col>
-    <el-col :span="20">
+    <el-col :span="20" style="margin-top: 20px;">
       <keep-alive>
-      <router-view>123</router-view>
+      <router-view></router-view>
      </keep-alive>
     </el-col>
   </el-row>
@@ -54,6 +53,11 @@
       },
       components: {
         headTop
+      },
+      computed: {
+        defaultActive(){
+          return this.$route.path.replace('/', '');
+        }
       },
       methods:{
         handleClose(){

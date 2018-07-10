@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import index from "@/page/index"
 import login from "@/page/login"
 import manage from "@/page/manage"
-import articleList from "@/page/articleList"
+import listArticle from "@/page/articleList"
 import addArticle from "@/page/addArticle"
+import detail from "@/page/detail"
 // import SocialSharing from 'vue-social-sharing';
 Vue.use(Router);
 
@@ -27,13 +28,18 @@ export default new Router({
       name: 'manage',
       component: manage,
       children:[{
-          path: '/articleList',
-          component: articleList
+          path: '/listArticle',
+          component: listArticle
 
       },{
         path: '/addArticle',
         component: addArticle
       }]
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: detail
     },
   ],
   mode:"history"

@@ -9,7 +9,7 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="sign"
+          prop="tag"
           label="标签"
           width="180">
         </el-table-column>
@@ -20,40 +20,103 @@
         <el-table-column
           prop="option"
           label="操作">
+          <template scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000">
+         :current-page="currentPage"
+         @current-change = "handleCurrentChange"
+         :page-size = "pageSize"
+        :total="total">
       </el-pagination>
     </div>
 </template>
 
 <script>
+  import axios from 'axios'
     export default {
         data(){
           return{
-            tableData: [{
-              date: '2016-05-02',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-              date: '2016-05-04',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-              date: '2016-05-01',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-              date: '2016-05-03',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1516 弄'
-            }]
+            tableData: [],
+            total:0,
+            currentPage:1,
+            pageSize:5
 
           }
+
+        },
+      created(){
+
+       this.initData();
+
+      },
+      methods:{
+          //初始化列表
+          initData(){
+            axios.get("/article/list").then((res)=>{
+              if(res.data.status==="1"){
+                console.log(res)
+                 this.total = res.data.content;
+                 this.initPage();
+              }
+            })
+
+          },
+        handleCurrentChange(val){
+          this.currentPage = val;
+          this.initPage()
+
+        },
+        //分页
+         initPage(){
+           var param = {
+             page:this.currentPage,
+             pageSize:this.pageSize,
+           };
+           axios.get("/article/page",{params:param}).then((res)=>{
+             if(res.data.status==="1"){
+               this.tableData = res.data.content
+             }
+           })
+         },
+        handleEdit(){
+
+
+        },
+        handleDelete(index, row){
+          this.$confirm('确认删除此数据？')
+            .then(()=> {
+              axios.get("/article/del?id="+row._id).then((res)=>{
+                if(res.data.status==="1"){
+                  this.initData()
+                  this.$message({
+                    type: 'success',
+                    message: '删除成功'
+                  });
+                }
+              })
+            })
+
+            .catch(()=> {
+
+            });
         }
+
+
+
+
+
+      }
     }
 </script>
 

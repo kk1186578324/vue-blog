@@ -1,7 +1,7 @@
 <template>
-  <el-row class="tac">
-    <el-col :span="24">
-      <p style="font-size: 20px;">文章分类</p>
+  <el-row class="tac" >
+    <el-col :span="24" style="height:800px; background: white">
+      <p style="font-size: 20px;background: #e9f8ff;padding: 10px;">文章分类</p>
       <el-menu
         default-active="2"
         class="el-menu-vertical-demo"
@@ -26,6 +26,7 @@
       </el-menu>
     </el-col>
   </el-row>
+
 
 </template>
 

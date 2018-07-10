@@ -1,13 +1,13 @@
 <template>
     <div class="head">
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1" class="head-image"><img src="../assets/logo.png" alt=""></el-menu-item>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
+        <el-menu-item  index="1" class="head-image"><img src="../assets/head.jpg" alt=""></el-menu-item>
         <el-menu-item index="2">mybolg</el-menu-item>
-        <el-menu-item index="3">博客</el-menu-item>
+        <el-menu-item index="index">博客</el-menu-item>
         <el-menu-item index="4">个人相册</el-menu-item>
         <el-menu-item index="5">留言</el-menu-item>
         <el-menu-item index="6">关于我</el-menu-item>
-        <el-menu-item>
+        <el-menu-item index="7">
 
           <el-select v-model="form.region" placeholder="搜索项" size="small" style="width: 100px;">
             <el-option label="区域一" value="shanghai"></el-option>

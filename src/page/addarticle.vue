@@ -50,7 +50,7 @@
           addForm:{
             title:'',
             inputVisible: false,
-            dynamicTags: ['标签一', '标签二', '标签三'],
+            dynamicTags: [],
             inputValue: '',
             editorOption:{},
             content:''
@@ -99,7 +99,13 @@
         handleInputConfirm() {
           let inputValue = this.addForm.inputValue;
           if (inputValue) {
-            this.addForm.dynamicTags.push(inputValue);
+            if(this.addForm.dynamicTags.indexOf(inputValue)==-1){
+              this.addForm.dynamicTags.push(inputValue);
+            }else {
+              this.$message('标签不能重复！');
+
+            }
+
           }
           this.addForm.inputVisible = false;
           this.addForm.inputValue = '';
@@ -109,7 +115,7 @@
 
           var param = {
             title :this.addForm.title,
-            // tag :this.addForm.dynamicTags,
+            tag :this.addForm.dynamicTags,
             content:this.addForm.content.replace(/<\/?[^>]*>/g,'')
           }
           axios.post("/article/add",param).then((res)=>{
@@ -119,11 +125,7 @@
 
             }
           })
-          // var delta = quill.getContents();
 
-          console.log(this.editor);
-          console.log(this.addForm)
-          console.log(this.addForm.editorOption.content)
 
         }
       }

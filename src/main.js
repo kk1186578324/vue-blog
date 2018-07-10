@@ -8,16 +8,11 @@ import 'element-ui/lib/theme-chalk/index.css';
 import vueQuillEditor from 'vue-quill-editor'//富文本编辑
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
-
-// import Share from 'vue-social-share'
-// Vue.use(Share)
-// Vue.use(SocialSharing);
-
+import "@/style/font-awesome-4.7.0/css/font-awesome.min.css"
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(vueQuillEditor)
 
-// Vue.use(axios);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
