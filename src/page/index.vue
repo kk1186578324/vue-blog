@@ -12,6 +12,8 @@
            :title = item.title
            :tag = item.tag
            :date = item.date
+           :id = item._id
+
         ></article-component>
        </div>
         <el-pagination
@@ -64,7 +66,7 @@
           footComponent
       },
       created(){
-        this.initData()
+        this.initData();
       },
       methods:{
         //初始化列表
@@ -92,6 +94,7 @@
           axios.get("/article/page",{params:param}).then((res)=>{
             if(res.data.status==="1"){
               this.tableData = res.data.content
+              console.log(this.tableData)
             }
           })
         },

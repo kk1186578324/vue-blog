@@ -6,6 +6,7 @@ import manage from "@/page/manage"
 import listArticle from "@/page/articleList"
 import addArticle from "@/page/addArticle"
 import detail from "@/page/detail"
+import search from "@/page/search"
 // import SocialSharing from 'vue-social-sharing';
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       component: detail
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: search
     },
   ],
   mode:"history"

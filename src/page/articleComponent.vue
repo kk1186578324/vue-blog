@@ -1,7 +1,7 @@
 <template>
     <div>
       <el-card class="box-card">
-        <div class="text item" @click="routerIndex">
+        <div class="text item" @click="routerIndex(id)">
           <h2>{{title}}</h2>
           <b class="fa  fa-tags">{{tag.join(',')}}</b>
           <span class="fa  fa-clock-o date-box" >{{date}}</span>
@@ -12,22 +12,21 @@
 
 <script>
     export default {
-      props:["title","tag","date"],
+      props:["title","tag","date","id"],
       data(){
-
         return{
+
+
 
         }
       },
       created(){
-        this.initData();
+        // this.initData();
       },
       methods:{
-        routerIndex(){
+        routerIndex(id){
 
-          this.$router.push("/detail")
-
-
+          this.$router.push({path:"/detail",query:{id:id}})
         }
 
       }

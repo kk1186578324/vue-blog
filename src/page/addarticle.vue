@@ -116,7 +116,7 @@
           var param = {
             title :this.addForm.title,
             tag :this.addForm.dynamicTags,
-            content:this.addForm.content.replace(/<\/?[^>]*>/g,'')
+            content:this.addForm.content
           }
           axios.post("/article/add",param).then((res)=>{
 

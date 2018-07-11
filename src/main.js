@@ -9,6 +9,7 @@ import vueQuillEditor from 'vue-quill-editor'//富文本编辑
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import "@/style/font-awesome-4.7.0/css/font-awesome.min.css"
+import store from './store/state.js'
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(vueQuillEditor)
@@ -17,6 +18,7 @@ Vue.use(vueQuillEditor)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

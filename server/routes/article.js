@@ -108,6 +108,26 @@ router.get("/del", function (req,res,next) {
     }
   });
 });
+//文章删除
+router.get("/detail", function (req,res,next) {
+  var id = req.query.id;
+  article.findOne({
+    _id:id
+  }, function (err,doc) {
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message,
+        result:''
+      });
+    }else{
+      res.json({
+        status:'1',
+        content:doc
+      });
+    }
+  });
+});
 function formatterDateTime(date) {
   var year = date.getFullYear();
   var month = (date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);

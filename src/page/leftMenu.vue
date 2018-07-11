@@ -1,7 +1,7 @@
 <template>
   <el-row class="tac" >
     <el-col :span="24" style="height:800px; background: white">
-      <p style="font-size: 20px;background: #e9f8ff;padding: 10px;">文章分类</p>
+      <p style="border-bottom: 1px dashed #ccc;padding: 10px;">文章分类</p>
       <el-menu
         default-active="2"
         class="el-menu-vertical-demo"
@@ -9,7 +9,7 @@
         @close="handleClose">
         <el-menu-item index="1">
             <i class="el-icon-location"></i>
-            <span slot="title">导航一</span>
+            <span slot="title">全部分类</span>
         </el-menu-item>
         <el-menu-item index="2">
           <i class="el-icon-menu"></i>
