@@ -4,7 +4,7 @@
     <head-top></head-top>
     <el-row :gutter="20" style="margin-top:20px;">
       <el-col :span="4"><div class="grid-content bg-purple-light">
-        <left-menu></left-menu>
+        <left-menu @initData = "initData"></left-menu>
       </div></el-col>
       <el-col :span="16">
         <div class="grid-content" style="height: 800px;">
@@ -56,7 +56,8 @@
             tableData:[],
             total:0,
             currentPage:1,
-            pageSize:5
+            pageSize:5,
+            status:'all'
           }
         },
       components:{
@@ -66,30 +67,31 @@
           footComponent
       },
       created(){
-        this.initData();
+        this.initData("all");
       },
       methods:{
         //初始化列表
-        initData(){
-          axios.get("/article/list").then((res)=>{
+        initData(val){
+          this.status=val
+          axios.get("/article/list?status="+val).then((res)=>{
             if(res.data.status==="1"){
-              console.log(res)
               this.total = res.data.content;
-              this.initPage();
+              this.initPage(val);
             }
           })
 
         },
-        handleCurrentChange(val){
+        handleCurrentChange(val,item){
           this.currentPage = val;
-          this.initPage()
+          this.initPage(this.status)
 
         },
         //分页
-        initPage(){
+        initPage(val){
           var param = {
             page:this.currentPage,
             pageSize:this.pageSize,
+            tag:val
           };
           axios.get("/article/page",{params:param}).then((res)=>{
             if(res.data.status==="1"){

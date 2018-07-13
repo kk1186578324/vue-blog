@@ -6,22 +6,27 @@
         default-active="2"
         class="el-menu-vertical-demo"
         @open="handleOpen"
-        @close="handleClose">
-        <el-menu-item index="1">
+        @close="handleClose"
+        @select="handleSelect">
+        <el-menu-item index="all">
             <i class="el-icon-location"></i>
             <span slot="title">全部分类</span>
         </el-menu-item>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
+        <el-menu-item index="js">
+          <img src="../assets/img/3997397795-5a6edc1c3167f_small.png" alt="" style="width: 20px;">
+          <span slot="title">JavaScript</span>
         </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-document"></i>
-          <span slot="title">导航三</span>
+        <el-menu-item index="html">
+          <img src="../assets/img/html.png" alt="" style="width: 30px;">
+          <span slot="title">Html</span>
         </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
-          <span slot="title">导航四</span>
+        <el-menu-item index="css">
+          <img src="../assets/img/css.png" alt="" style="width: 30px;">
+        <span slot="title">Css</span>
+      </el-menu-item>
+        <el-menu-item index="node.js">
+          <img src="../assets/img/node.png" alt="" style="width: 30px;">
+          <span slot="title">Node.js</span>
         </el-menu-item>
       </el-menu>
     </el-col>
@@ -37,6 +42,12 @@
         console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      },
+
+      handleSelect(key, keyPath) {
+
+        this.$emit('initData', key)
         console.log(key, keyPath);
       }
     }

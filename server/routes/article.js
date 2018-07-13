@@ -10,8 +10,7 @@ router.post("/add",function(req,res,next){
     tag:req.body.tag,
     content:req.body.content,
     date: formatterDateTime(new Date())
-  }
-
+  };
   article.create(param,function(err,doc){
     if(err){
       console.log(err);
@@ -33,37 +32,46 @@ router.post("/add",function(req,res,next){
     }
   })
 });
-router.get("/page",function(req,res,next){
-  let page = parseInt(req.param("page"));
-  let pageSize = parseInt(req.param("pageSize"));
-  let skip = (page-1)*pageSize;
-  // skip(skipnumber).limit(limit).sort(sort)
-  article.find({},function(err,doc){
+
+router.post("/update",function(req,res,next){
+
+  var conditions = {username : 'model_demo_username'};
+  var options    = {upsert : true};
+  var param = {
+    title:req.body.title,
+    tag:req.body.tag,
+    content:req.body.content,
+    date: formatterDateTime(new Date())
+  };
+  article.update({_id:req.body.id},param,function(err,doc){
     if(err){
+
       res.json({
-        status:'0',
+        status:'1',
         msg:err.message
       })
     }else{
       if(doc){
-        console.log(doc)
         res.json({
           status:'1',
-          content:doc
         })
       }else{
         res.json({
           status:'0',
-          msg:"查询错误！"
+          msg:"账户名或密码错误"
         })
       }
     }
-  }).skip(skip).limit(pageSize)
+  })
 });
 
-
+//文章总数
 router.get("/list",function(req,res,next){
-  article.count({},function(err,doc){
+
+  var status = req.query.status;
+  var param={};
+  status!=="all"? param.tag=status:null;
+  article.count(param,function(err,doc){
     if(err){
       res.json({
         status:'0',
@@ -84,6 +92,41 @@ router.get("/list",function(req,res,next){
     }
   })
 });
+
+//分页
+router.get("/page",function(req,res,next){
+  let page = parseInt(req.param("page"));
+  let pageSize = parseInt(req.param("pageSize"));
+  let skip = (page-1)*pageSize;
+
+  let tag = req.param("tag");
+  let param = {};
+
+  tag!=="all"? param.tag=tag:null;
+  console.log(param);
+  article.find(param,function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      })
+    }else{
+      if(doc){
+        res.json({
+          status:'1',
+          content:doc
+        })
+      }else{
+        res.json({
+          status:'0',
+          msg:"查询错误！"
+        })
+      }
+    }
+  }).skip(skip).limit(pageSize)
+});
+
+
 
 
 
@@ -108,7 +151,7 @@ router.get("/del", function (req,res,next) {
     }
   });
 });
-//文章删除
+//文章详情
 router.get("/detail", function (req,res,next) {
   var id = req.query.id;
   article.findOne({

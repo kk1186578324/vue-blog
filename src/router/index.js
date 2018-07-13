@@ -6,7 +6,7 @@ import manage from "@/page/manage"
 import listArticle from "@/page/articleList"
 import addArticle from "@/page/addArticle"
 import detail from "@/page/detail"
-import search from "@/page/search"
+import search from "@/page/searcher"
 // import SocialSharing from 'vue-social-sharing';
 Vue.use(Router);
 
@@ -30,11 +30,13 @@ export default new Router({
       component: manage,
       children:[{
           path: '/listArticle',
-          component: listArticle
+          component: listArticle,
+          meta: ['文章列表']
 
       },{
         path: '/addArticle',
-        component: addArticle
+        component: addArticle,
+        meta: ['添加文章']
       }]
     },
     {

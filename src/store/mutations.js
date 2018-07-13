@@ -1,8 +1,10 @@
-import {SEARCH}from './mutation-type.js';
+import {KEY,VALUE}from './mutation-type.js';
 
 export default {
-  [SEARCH](state, name) {
-    state.name = name;
+  [KEY](state, key) {
+    state.key = key;
   },
-
+  [VALUE](state, value) {
+    state.value = value;
+  },
 };

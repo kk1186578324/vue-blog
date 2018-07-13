@@ -25,6 +25,7 @@
     <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
 
     <quill-editor class="fill"
+     v-model="addForm.content"
     :options="addForm.editorOption"
     ref="QuillEditor"
     @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
@@ -67,23 +68,55 @@
           return this.$refs.QuillEditor.quill
         }
       },
+      created(){
+        var id = this.$route.query.articleId;
+        if(id){
+          this.showEdit(id)
+        }
+      },
+      watch: {
+        //监听路由，只要路由有变化(路径，参数等变化)都有执行下面的函数，你可以
+        $route: {
+          handler: function (val, oldVal) {
+           console.log(val,oldVal)
+            var id = this.$route.query.articleId;
+            if(id){
+              this.showEdit(id)
+            }else{
+              this.addForm.title ="";
+              this.addForm.dynamicTags =[];
+              this.addForm.content = "";
+            }
+          },
+          deep: true
+        }
+      },
       methods:{
         onEditorChange({editor, html, text}) {
           this.addForm.content=html;
-          console.log(html)
+
         },
         onEditorFocus(e) {
 
-          console.log(e)
+
 
         },
         onEditorReady(e) {
-          console.log(e)
 
         },
         onEditorBlur(e) {
-          console.log(e)
 
+
+        },
+        showEdit(id){
+
+          axios.get("/article/detail?id="+id).then((res)=>{
+            if(res.data.status==="1"){
+              this.addForm.title = res.data.content.title
+              this.addForm.dynamicTags = res.data.content.tag;
+              this.addForm.content =  res.data.content.content
+            }
+          })
         },
         handleClose(tag) {
           this.addForm.dynamicTags.splice(this.addForm.dynamicTags.indexOf(tag), 1);
@@ -95,7 +128,7 @@
             this.$refs.saveTagInput.$refs.input.focus();
           });
         },
-
+        //标签
         handleInputConfirm() {
           let inputValue = this.addForm.inputValue;
           if (inputValue) {
@@ -118,11 +151,17 @@
             tag :this.addForm.dynamicTags,
             content:this.addForm.content
           }
-          axios.post("/article/add",param).then((res)=>{
+          var id = this.$route.query.articleId;
+          var _url = "/article/add";
+          if(id){
+            _url = "/article/update";
+            param.id = id;
+          };
 
+
+          axios.post(_url,param).then((res)=>{
             if(res.data.status==="1"){
               this.$message('发布成功！');
-
             }
           })
 

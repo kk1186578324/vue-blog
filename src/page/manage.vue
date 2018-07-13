@@ -31,9 +31,9 @@
       </el-menu>
     </el-col>
     <el-col :span="20" style="margin-top: 20px;">
-      <keep-alive>
+
       <router-view></router-view>
-     </keep-alive>
+
     </el-col>
   </el-row>
   </div>
@@ -45,7 +45,6 @@
 <script>
   import headTop from "@/components/headTop"
     export default {
-        name: "manage",
       data(){
           return{
 

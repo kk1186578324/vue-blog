@@ -1,7 +1,7 @@
-import {SEARCH} from './mutation-types.js'
+import {KEY,VALUE} from './mutation-type.js'
 
 export default {
-  nameAsyn({commit}, {name}) {
-    commit(SEARCH, name);
+  keyAction({commit}, {key}) {
+    commit(KEY, key);
   }
 };

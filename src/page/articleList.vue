@@ -11,7 +11,9 @@
         <el-table-column
           prop="tag"
           label="标签"
-          width="180">
+          width="180"
+          :formatter="formatter"
+          >
         </el-table-column>
         <el-table-column
           prop="date"
@@ -63,35 +65,38 @@
       methods:{
           //初始化列表
           initData(){
-            axios.get("/article/list").then((res)=>{
+            axios.get("/article/list?status=all").then((res)=>{
               if(res.data.status==="1"){
                 console.log(res)
                  this.total = res.data.content;
                  this.initPage();
               }
             })
-
           },
         handleCurrentChange(val){
           this.currentPage = val;
           this.initPage()
 
         },
+        formatter(row, column){
+            return row.tag.join(',')
+        },
         //分页
          initPage(){
            var param = {
              page:this.currentPage,
              pageSize:this.pageSize,
+             tag:"all"
+
            };
            axios.get("/article/page",{params:param}).then((res)=>{
              if(res.data.status==="1"){
-               this.tableData = res.data.content
+               this.tableData = res.data.content;
              }
            })
          },
-        handleEdit(){
-
-
+        handleEdit(index,row){
+            this.$router.push({path:"addarticle",query:{articleId:row._id}})
         },
         handleDelete(index, row){
           this.$confirm('确认删除此数据？')
@@ -110,6 +115,7 @@
             .catch(()=> {
 
             });
+
         }
 
 
