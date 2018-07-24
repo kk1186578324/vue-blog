@@ -7,6 +7,7 @@ import listArticle from "@/page/articleList"
 import addArticle from "@/page/addArticle"
 import detail from "@/page/detail"
 import search from "@/page/searcher"
+import error from "@/page/error"
 // import SocialSharing from 'vue-social-sharing';
 Vue.use(Router);
 
@@ -15,7 +16,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/index',
+      path: '/',
       name: 'index',
       component: index
     },
@@ -48,7 +49,7 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: search
-    },
+    }
   ],
   mode:"history"
 })

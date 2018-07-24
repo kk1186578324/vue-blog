@@ -18,19 +18,30 @@
         </el-menu-item>
 
       </el-menu>
+
+
     </div>
 </template>
 
 <script>
   import {mapMutations, mapActions} from 'vuex';
+  // import VueCropper from 'vue-cropper';
     export default {
       data() {
         return {
+          crap: false,
+          previews: {},
+          activeIndex:'index',
           form:{
             key:"",
             value:""
-          }
+          },
+
+
         }
+      },
+      components:{
+        // VueCropper
       },
       methods: {
 
@@ -45,25 +56,9 @@
         },
         onSubmit() {
 
-          console.log(this.form)
-
-        // ...mapMutations([
-        //     'add',
-        //     'reduce'
-        //   ]);
-          var param = this.form
-          // this.$route.push("/")
-          // axios.post("/user/login",param).then((res)=>{
-          //
-          //   if(res.data.status==="1"){
-          //
-          //     this.$router.push({path:"/manage"})
-          //
-          //   }
-          // })
-
         }
-      }
+      },
+
     }
 </script>
 

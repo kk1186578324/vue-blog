@@ -35,7 +35,7 @@
     </quill-editor>
     </el-form-item>
       <el-form-item style="margin-top:100px;">
-    <el-button type="primary" plain @click="onSubmit">发布文章</el-button>
+    <el-button type="primary" plain @click="onSubmit('addForm')">发布文章</el-button>
     <el-button type="primary" plain>存为草稿</el-button>
       </el-form-item>
     </el-form>
@@ -143,7 +143,7 @@
           this.addForm.inputVisible = false;
           this.addForm.inputValue = '';
         },
-        onSubmit(){
+        onSubmit(formName){
           console.log(this.addForm)
 
           var param = {
@@ -157,12 +157,19 @@
             _url = "/article/update";
             param.id = id;
           };
+          this.$refs[formName].validate(async (valid) => {
+            if(valid){
+              axios.post(_url, param).then((res) => {
+                if (res.data.status === "1") {
+                  this.$message('发布成功！');
+                }else if(res.data.status="1001"){
+                  this.$message('暂无权限,请登录！');
 
-
-          axios.post(_url,param).then((res)=>{
-            if(res.data.status==="1"){
-              this.$message('发布成功！');
+                }
+              })
             }
+
+
           })
 
 

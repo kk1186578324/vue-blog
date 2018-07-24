@@ -87,7 +87,6 @@
              page:this.currentPage,
              pageSize:this.pageSize,
              tag:"all"
-
            };
            axios.get("/article/page",{params:param}).then((res)=>{
              if(res.data.status==="1"){
@@ -108,6 +107,9 @@
                     type: 'success',
                     message: '删除成功'
                   });
+                }else if(res.data.status="1001"){
+                  this.$message('暂无权限,请登录！');
+
                 }
               })
             })

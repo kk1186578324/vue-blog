@@ -5,7 +5,7 @@
   <el-row :gutter="20">
     <el-col :span="4">
       <el-menu
-        :default-active="defaultActive"
+        default-active="listArticle"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
@@ -36,6 +36,12 @@
 
     </el-col>
   </el-row>
+
+
+    <div class="foot">
+      <foot-component></foot-component>
+    </div>
+
   </div>
 
 
@@ -44,6 +50,7 @@
 
 <script>
   import headTop from "@/components/headTop"
+  import footComponent from "@/components/footComponent"
     export default {
       data(){
           return{
@@ -51,7 +58,8 @@
           }
       },
       components: {
-        headTop
+        headTop,
+        footComponent
       },
       computed: {
         defaultActive(){
@@ -73,5 +81,11 @@
 .fill{
   width: 100%;
   height:100%;
+}
+.foot{
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  text-align: center;
 }
 </style>

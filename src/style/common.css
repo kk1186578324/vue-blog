@@ -10,5 +10,3 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
   -webkit-font-smoothing: antialiased;
 }
 
-.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}
-.clearfloat{zoom:1}
